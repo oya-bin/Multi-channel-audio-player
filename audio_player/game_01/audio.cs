@@ -30,13 +30,13 @@ namespace game_01
             catch (Exception) { }
             return buf.ToArray();
         }
-        public static byte[] Wma_to_wav(string path, byte ch, out byte[] mono)
+        public static byte[] Wma_to_wav(string fil_n, byte ch, out byte[] mono)
         {
             WaveFormat format = new WaveFormat(48000, 16, 1);
             mono = null;
             try
             {
-                NAudio.WindowsMediaFormat.WMAFileReader reader = new NAudio.WindowsMediaFormat.WMAFileReader(path);
+                NAudio.WindowsMediaFormat.WMAFileReader reader = new NAudio.WindowsMediaFormat.WMAFileReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     mono = new byte[stream.Length];
@@ -48,7 +48,7 @@ namespace game_01
             byte[] buffer = null;
             try
             {
-                NAudio.WindowsMediaFormat.WMAFileReader reader = new NAudio.WindowsMediaFormat.WMAFileReader(path);
+                NAudio.WindowsMediaFormat.WMAFileReader reader = new NAudio.WindowsMediaFormat.WMAFileReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     buffer = new byte[stream.Length];
@@ -58,13 +58,13 @@ namespace game_01
             catch (Exception) { }
             return buffer;
         }
-        public static byte[] Wav_to_wav2(string path, byte ch, out byte[] mono)
+        public static byte[] Wav_to_wav2(string fil_n, byte ch, out byte[] mono)
         {
             WaveFormat format = new WaveFormat(48000, 16, 1);
             mono = null;
             try
             {
-                WaveFileReader reader = new WaveFileReader(path);
+                WaveFileReader reader = new WaveFileReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     mono = new byte[stream.Length];
@@ -76,7 +76,7 @@ namespace game_01
             byte[] buffer = null;
             try
             {
-                WaveFileReader reader = new WaveFileReader(path);
+                WaveFileReader reader = new WaveFileReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     buffer = new byte[stream.Length];
@@ -86,13 +86,13 @@ namespace game_01
             catch (Exception) { }
             return buffer;
         }
-        public static byte[] Mp3_to_wav(string path, byte ch, out byte[] mono)
+        public static byte[] Mp3_to_wav(string fil_n, byte ch, out byte[] mono)
         {
             WaveFormat format = new WaveFormat(48000, 16, 1);
             mono = null;
             try
             {
-                Mp3FileReader reader = new Mp3FileReader(path);
+                Mp3FileReader reader = new Mp3FileReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     mono = new byte[stream.Length];
@@ -104,7 +104,7 @@ namespace game_01
             byte[] buffer = null;
             try
             {
-                Mp3FileReader reader = new Mp3FileReader(path);
+                Mp3FileReader reader = new Mp3FileReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     buffer = new byte[stream.Length];
@@ -114,13 +114,13 @@ namespace game_01
             catch (Exception) { }
             return buffer;
         }
-        public static byte[] Aiff_to_wav(string path, byte ch, out byte[] mono)
+        public static byte[] Aiff_to_wav(string fil_n, byte ch, out byte[] mono)
         {
             WaveFormat format = new WaveFormat(48000, 16, 1);
             mono = null;
             try
             {
-                AiffFileReader reader = new AiffFileReader(path);
+                AiffFileReader reader = new AiffFileReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     mono = new byte[stream.Length];
@@ -132,7 +132,7 @@ namespace game_01
             byte[] buffer = null;
             try
             {
-                AiffFileReader reader = new AiffFileReader(path);
+                AiffFileReader reader = new AiffFileReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     buffer = new byte[stream.Length];
@@ -142,13 +142,13 @@ namespace game_01
             catch (Exception) { }
             return buffer;
         }
-        public static byte[] Flac_to_wav(string path, byte ch, out byte[] mono)
+        public static byte[] Flac_to_wav(string fil_n, byte ch, out byte[] mono)
         {
             WaveFormat format = new WaveFormat(48000, 16, 1);
             mono = null;
             try
             {
-                NAudio.Flac.FlacReader reader = new NAudio.Flac.FlacReader(path);
+                NAudio.Flac.FlacReader reader = new NAudio.Flac.FlacReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     mono = new byte[stream.Length];
@@ -160,7 +160,7 @@ namespace game_01
             byte[] buffer = null;
             try
             {
-                NAudio.Flac.FlacReader reader = new NAudio.Flac.FlacReader(path);
+                NAudio.Flac.FlacReader reader = new NAudio.Flac.FlacReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     buffer = new byte[stream.Length];
@@ -170,13 +170,13 @@ namespace game_01
             catch (Exception) { }
             return buffer;
         }
-        public static byte[] Ogg_to_wav(string path, byte ch, out byte[] mono)
+        public static byte[] Ogg_to_wav(string fil_n, byte ch, out byte[] mono)
         {
             WaveFormat format = new WaveFormat(48000, 16, 1);
             mono = null;
             try
             {
-                NAudio.Vorbis.VorbisWaveReader reader = new NAudio.Vorbis.VorbisWaveReader(path);
+                NAudio.Vorbis.VorbisWaveReader reader = new NAudio.Vorbis.VorbisWaveReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     mono = new byte[stream.Length];
@@ -188,7 +188,7 @@ namespace game_01
             byte[] buffer = null;
             try
             {
-                NAudio.Vorbis.VorbisWaveReader reader = new NAudio.Vorbis.VorbisWaveReader(path);
+                NAudio.Vorbis.VorbisWaveReader reader = new NAudio.Vorbis.VorbisWaveReader(fil_n);
                 using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
                 {
                     buffer = new byte[stream.Length];
