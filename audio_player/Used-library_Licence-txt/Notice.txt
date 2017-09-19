@@ -1,0 +1,29 @@
+Licence(Ms-PL)
+
+NAudio
+-Mark Heath
+NAudio Vorbis
+-Andrew Ward
+NAudio Wma
+-Mark Heath, Yuval Naveh
+https://github.com/naudio
+
+NVorbis
+-Andrew Ward
+http://nvorbis.codeplex.com/
+
+NAudio.Flac
+-Nathan Harrenstein
+https://github.com/nharren
+ based on the sources of "CSCore"
+
+ CSCore
+ -Florian R.
+ https://github.com/filoe/
+
+
+Licence(Free?)
+
+SharpDX
+-Alexandre Mutel
+http://sharpdx.org/
