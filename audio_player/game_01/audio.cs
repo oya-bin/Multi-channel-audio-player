@@ -42,6 +42,7 @@ namespace game_01
                     mono = new byte[stream.Length];
                     stream.Read(mono, 0, mono.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             format = new WaveFormat(48000, 16, ch);
@@ -54,6 +55,7 @@ namespace game_01
                     buffer = new byte[stream.Length];
                     stream.Read(buffer, 0, buffer.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             return buffer;
@@ -70,6 +72,7 @@ namespace game_01
                     mono = new byte[stream.Length];
                     stream.Read(mono, 0, mono.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             format = new WaveFormat(48000, 16, ch);
@@ -82,6 +85,7 @@ namespace game_01
                     buffer = new byte[stream.Length];
                     stream.Read(buffer, 0, buffer.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             return buffer;
@@ -98,6 +102,7 @@ namespace game_01
                     mono = new byte[stream.Length];
                     stream.Read(mono, 0, mono.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             format = new WaveFormat(48000, 16, ch);
@@ -110,6 +115,7 @@ namespace game_01
                     buffer = new byte[stream.Length];
                     stream.Read(buffer, 0, buffer.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             return buffer;
@@ -126,6 +132,7 @@ namespace game_01
                     mono = new byte[stream.Length];
                     stream.Read(mono, 0, mono.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             format = new WaveFormat(48000, 16, ch);
@@ -138,6 +145,7 @@ namespace game_01
                     buffer = new byte[stream.Length];
                     stream.Read(buffer, 0, buffer.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             return buffer;
@@ -154,6 +162,7 @@ namespace game_01
                     mono = new byte[stream.Length];
                     stream.Read(mono, 0, mono.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             format = new WaveFormat(48000, 16, ch);
@@ -166,6 +175,7 @@ namespace game_01
                     buffer = new byte[stream.Length];
                     stream.Read(buffer, 0, buffer.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             return buffer;
@@ -182,6 +192,7 @@ namespace game_01
                     mono = new byte[stream.Length];
                     stream.Read(mono, 0, mono.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             format = new WaveFormat(48000, 16, ch);
@@ -194,6 +205,7 @@ namespace game_01
                     buffer = new byte[stream.Length];
                     stream.Read(buffer, 0, buffer.Length);
                 }
+                reader.Dispose();
             }
             catch (Exception) { }
             return buffer;

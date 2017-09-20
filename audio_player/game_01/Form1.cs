@@ -159,39 +159,41 @@ namespace game_01
             Frm1_c.mus_exit = true;
             lb_mus.Enabled = true;
             cb_bsidrev.Enabled = true;
+            Frm1_c.lock_list = false;
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Frm1_c.mus_exit = true;
+            Frm1_c.lock_list = false;
             try { xa_mus.Dispose(); }
             catch (Exception) { }
         }
 
-        private byte[] Source_sel(string file, out byte[] mono)
+        private byte[] Source_sel(string fil_n, out byte[] mono)
         {
             mono = null;
-            string str = System.IO.Path.GetExtension(file);
+            string str = System.IO.Path.GetExtension(fil_n);
             switch (str.ToLower())
             {
                 case ".flac":
                 case ".fla":
-                    return Audio.Flac_to_wav(file, 2, out mono);
+                    return Audio.Flac_to_wav(fil_n, 2, out mono);
                 case ".ogg":
                 case ".oga":
                 case ".ogx":
-                    return Audio.Ogg_to_wav(file, 2, out mono);
+                    return Audio.Ogg_to_wav(fil_n, 2, out mono);
                 case ".wma":
-                    return Audio.Wma_to_wav(file, 2, out mono);
+                    return Audio.Wma_to_wav(fil_n, 2, out mono);
                 case ".mp3":
-                    return Audio.Mp3_to_wav(file, 2, out mono);
+                    return Audio.Mp3_to_wav(fil_n, 2, out mono);
                 case ".wav":
-                    return Audio.Wav_to_wav2(file, 2, out mono);
+                    return Audio.Wav_to_wav2(fil_n, 2, out mono);
                 case ".aiff":
                 case ".aif":
                 case ".aifc":
                 case ".afc":
-                    return Audio.Aiff_to_wav(file, 2, out mono);
+                    return Audio.Aiff_to_wav(fil_n, 2, out mono);
                 default:
                     return null;
             }
@@ -276,6 +278,7 @@ namespace game_01
         private void Lb_mus_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Frm1_c.lock_list) { return; }
+            Frm1_c.lock_list = true;
             lb_mus.Enabled = false;
             Application.DoEvents();
             Frm1_c.mus_exit = false;
@@ -285,30 +288,30 @@ namespace game_01
                 for (int i = x; i < Frm1_c.files.Length; i++)
                 {
                     int y = Play_start(Frm1_c.files[i]);
-                    if (y == 0)
+                    switch (y)
                     {
-                        while (true)
-                        {
-                            if (Frm1_c.mus_exit) { Waittsk.Wait(); Waittsk.Dispose(); return; }
-                            if (!xa_mus.mus_start[0]) { Waittsk.Wait(); Waittsk.Dispose(); break; }
-                            Application.DoEvents();
-                            System.Threading.Thread.Sleep(100);
-                        }
+                        case 0:
+                            while (true)
+                            {
+                                if (Frm1_c.mus_exit) { Waittsk.Wait(); Waittsk.Dispose(); Frm1_c.lock_list = false; return; }
+                                if (!xa_mus.mus_start[0]) { Waittsk.Wait(); Waittsk.Dispose(); break; }
+                                Application.DoEvents();
+                                System.Threading.Thread.Sleep(100);
+                            }
+                            break;
+                        case -2:
+                            break;
+                        case -1:
+                            lb_mus.Enabled = true;
+                            gb_speakers.Enabled = true;
+                            cb_bsidrev.Enabled = true;
+                            Frm1_c.lock_list = false;
+                            return;
                     }
-                    else if (y == -2) { }
-                    else if (y == -1)
-                    {
-                        lb_mus.Enabled = true;
-                        gb_speakers.Enabled = true;
-                        cb_bsidrev.Enabled = true;
-                        return;
-                    }
-                    Frm1_c.lock_list = true;
                     try { lb_mus.SelectedIndex++; }
                     catch (Exception) { lb_mus.SelectedIndex = 0; }
                     Application.DoEvents();
                     System.Threading.Thread.Sleep(100);
-                    Frm1_c.lock_list = false;
                 }
                 if (!cb_loop.Checked) { break; }
                 x = 0;
@@ -316,7 +319,7 @@ namespace game_01
             lb_mus.Enabled = true;
             gb_speakers.Enabled = true;
             cb_bsidrev.Enabled = true;
-
+            Frm1_c.lock_list = false;
         }
 
         private void But_Licence_Click(object sender, EventArgs e)
