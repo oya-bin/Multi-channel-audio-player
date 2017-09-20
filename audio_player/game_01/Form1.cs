@@ -64,14 +64,14 @@ namespace game_01
             return str;
         }
 
-        private int Play_start(string path)
+        private int Play_start(string fil_n)
         {
             if (xa_mus == null) { xa_mus = new Xa2_mus(); }
             else { xa_mus.Dispose(); }
             gb_speakers.Enabled = false;
             cb_bsidrev.Enabled = false;
             xa_mus.Init(0,Frm1_c.ch);
-            byte[] dat = Source_sel(path, out byte[] mono);
+            byte[] dat = Source_sel(fil_n, out byte[] mono);
             if (dat == null)
             {
                 gb_speakers.Enabled = true;

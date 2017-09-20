@@ -49,8 +49,15 @@ namespace game_01
             //{ MessageBox.Show("device_max:" + (xa_sou.DeviceCount - 1).ToString() + " select is:"
             //    + dev + "\r\nError Restart device 0"); dev_ind = 0; }
             //else { dev_ind = dev; }
-            if (ch == 21) { ch = 3; }
-            else if(ch == 51) { ch = 6; }
+            switch (ch)
+            {
+                case 21:
+                    ch = 3;
+                    break;
+                case 51:
+                    ch = 6;
+                    break;
+            }
             //var xa_mas = new SharpDX.XAudio2.MasteringVoice(xa_sou, ch, 48000, dev_ind);
             var xa_mas = new SharpDX.XAudio2.MasteringVoice(xa_sou,ch,48000);
             //dev_ind = dev;
