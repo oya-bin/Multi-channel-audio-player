@@ -393,6 +393,7 @@ namespace game_01
         {
             List<byte> byt = new List<byte>();
             int i2; int i3;
+            byte[] byt1 = null; byte[] byt2 = null;
             if (rev)
             {
                 for (int i = 0; i < dat.Length; i += 4)
@@ -404,8 +405,8 @@ namespace game_01
                     byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                     if (surround)
                     {
-                        byte[] byt1 = new byte[] { dat[i2], dat[i2 + 1] };
-                        byte[] byt2 = new byte[] { dat[i], dat[i + 1] };
+                        byt1 = new byte[] { dat[i2], dat[i2 + 1] };
+                        byt2 = new byte[] { dat[i], dat[i + 1] };
                         Set_surround(ref byt1, ref byt2);
                         byt.Add(byt1[0]); byt.Add(byt1[1]);
                         byt.Add(byt2[0]); byt.Add(byt2[1]);
@@ -428,8 +429,8 @@ namespace game_01
                     byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                     if (surround)
                     {
-                        byte[] byt1 = new byte[] { dat[i], dat[i + 1] };
-                        byte[] byt2 = new byte[] { dat[i2], dat[i2 + 1] };
+                        byt1 = new byte[] { dat[i], dat[i + 1] };
+                        byt2 = new byte[] { dat[i2], dat[i2 + 1] };
                         Set_surround(ref byt1, ref byt2);
                         byt.Add(byt1[0]); byt.Add(byt1[1]);
                         byt.Add(byt2[0]); byt.Add(byt2[1]);
