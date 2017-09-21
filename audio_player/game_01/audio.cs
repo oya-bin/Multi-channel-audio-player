@@ -17,197 +17,241 @@ namespace game_01
             List<byte> buf = new List<byte>(); // データ格納用配列
             try
             {
-                FileStream fs = new FileStream(fil_n, FileMode.Open, FileAccess.Read);
-                int fileSize = (int)fs.Length; // ファイルのサイズ
-                BinaryReader bl = new BinaryReader(fs);
-                for (int i = 0; i < 44; i++)
-                { bl.ReadByte(); }
-                for (int i = 44; i < fileSize; i++)
-                { buf.Add(bl.ReadByte()); }
-                bl.Dispose();
-                fs.Dispose();
+                using (FileStream fs = new FileStream(fil_n, FileMode.Open, FileAccess.Read))
+                {
+                    int fileSize = (int)fs.Length; // ファイルのサイズ
+                    using (BinaryReader bl = new BinaryReader(fs))
+                    {
+                        for (int i = 0; i < 44; i++)
+                        { bl.ReadByte(); }
+                        for (int i = 44; i < fileSize; i++)
+                        { buf.Add(bl.ReadByte()); }
+                    }
+                }
             }
             catch (Exception) { }
             return buf.ToArray();
         }
         public static byte[] Wma_to_wav(string fil_n, byte ch, out byte[] mono)
         {
-            WaveFormat format = new WaveFormat(48000, 16, 1);
-            mono = null;
-            try
+            byte[] mono2 = null;
+            Task a = Task.Run(() =>
             {
-                NAudio.WindowsMediaFormat.WMAFileReader reader = new NAudio.WindowsMediaFormat.WMAFileReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, 1);
+                try
                 {
-                    mono = new byte[stream.Length];
-                    stream.Read(mono, 0, mono.Length);
+                    using (NAudio.WindowsMediaFormat.WMAFileReader reader = new NAudio.WindowsMediaFormat.WMAFileReader(fil_n))
+                    {
+                        using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                        {
+                            mono2 = new byte[stream.Length];
+                            stream.Read(mono2, 0, mono2.Length);
+                        }
+                    }
                 }
-                reader.Dispose();
-            }
-            catch (Exception) { }
-            format = new WaveFormat(48000, 16, ch);
+                catch (Exception) { }
+            });
             byte[] buffer = null;
             try
             {
-                NAudio.WindowsMediaFormat.WMAFileReader reader = new NAudio.WindowsMediaFormat.WMAFileReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, ch);
+                using (NAudio.WindowsMediaFormat.WMAFileReader reader = new NAudio.WindowsMediaFormat.WMAFileReader(fil_n))
                 {
-                    buffer = new byte[stream.Length];
-                    stream.Read(buffer, 0, buffer.Length);
+                    using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                    {
+                        buffer = new byte[stream.Length];
+                        stream.Read(buffer, 0, buffer.Length);
+                    }
                 }
-                reader.Dispose();
             }
             catch (Exception) { }
+            a.Wait();
+            mono = mono2;
             return buffer;
         }
         public static byte[] Wav_to_wav2(string fil_n, byte ch, out byte[] mono)
         {
-            WaveFormat format = new WaveFormat(48000, 16, 1);
-            mono = null;
-            try
+            byte[] mono2 = null;
+            Task a = Task.Run(() =>
             {
-                WaveFileReader reader = new WaveFileReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, 1);
+                try
                 {
-                    mono = new byte[stream.Length];
-                    stream.Read(mono, 0, mono.Length);
-                }
-                reader.Dispose();
-            }
-            catch (Exception) { }
-            format = new WaveFormat(48000, 16, ch);
+                     using (WaveFileReader reader = new WaveFileReader(fil_n))
+                     {
+                         using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                         {
+                             mono2 = new byte[stream.Length];
+                             stream.Read(mono2, 0, mono2.Length);
+                         }
+                     }
+                 }
+                 catch (Exception) { }
+            });
             byte[] buffer = null;
             try
             {
-                WaveFileReader reader = new WaveFileReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, ch);
+                using (WaveFileReader reader = new WaveFileReader(fil_n))
                 {
-                    buffer = new byte[stream.Length];
-                    stream.Read(buffer, 0, buffer.Length);
+                    using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                    {
+                        buffer = new byte[stream.Length];
+                        stream.Read(buffer, 0, buffer.Length);
+                    }
                 }
-                reader.Dispose();
             }
             catch (Exception) { }
+            a.Wait();
+            mono = mono2;
             return buffer;
         }
         public static byte[] Mp3_to_wav(string fil_n, byte ch, out byte[] mono)
         {
-            WaveFormat format = new WaveFormat(48000, 16, 1);
-            mono = null;
-            try
+            byte[] mono2 = null;
+            Task a = Task.Run(() =>
             {
-                Mp3FileReader reader = new Mp3FileReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, 1);
+                try
                 {
-                    mono = new byte[stream.Length];
-                    stream.Read(mono, 0, mono.Length);
+                    using (Mp3FileReader reader = new Mp3FileReader(fil_n))
+                    {
+                        using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                        {
+                            mono2 = new byte[stream.Length];
+                            stream.Read(mono2, 0, mono2.Length);
+                        }
+                    }
                 }
-                reader.Dispose();
-            }
-            catch (Exception) { }
-            format = new WaveFormat(48000, 16, ch);
+                catch (Exception) { }
+            });
             byte[] buffer = null;
             try
             {
-                Mp3FileReader reader = new Mp3FileReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, ch);
+                using (Mp3FileReader reader = new Mp3FileReader(fil_n))
                 {
-                    buffer = new byte[stream.Length];
-                    stream.Read(buffer, 0, buffer.Length);
+                    using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                    {
+                        buffer = new byte[stream.Length];
+                        stream.Read(buffer, 0, buffer.Length);
+                    }
                 }
-                reader.Dispose();
             }
             catch (Exception) { }
+            a.Wait();
+            mono = mono2;
             return buffer;
         }
         public static byte[] Aiff_to_wav(string fil_n, byte ch, out byte[] mono)
         {
-            WaveFormat format = new WaveFormat(48000, 16, 1);
-            mono = null;
-            try
+            byte[] mono2 = null;
+            Task a = Task.Run(() =>
             {
-                AiffFileReader reader = new AiffFileReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, 1);
+                try
                 {
-                    mono = new byte[stream.Length];
-                    stream.Read(mono, 0, mono.Length);
+                    using (AiffFileReader reader = new AiffFileReader(fil_n))
+                    {
+                        using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                        {
+                            mono2 = new byte[stream.Length];
+                            stream.Read(mono2, 0, mono2.Length);
+                        }
+                    }
                 }
-                reader.Dispose();
-            }
-            catch (Exception) { }
-            format = new WaveFormat(48000, 16, ch);
+                catch (Exception) { }
+            });
             byte[] buffer = null;
             try
             {
-                AiffFileReader reader = new AiffFileReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, ch);
+                using (AiffFileReader reader = new AiffFileReader(fil_n))
                 {
-                    buffer = new byte[stream.Length];
-                    stream.Read(buffer, 0, buffer.Length);
+                    using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                    {
+                        buffer = new byte[stream.Length];
+                        stream.Read(buffer, 0, buffer.Length);
+                    }
                 }
-                reader.Dispose();
             }
             catch (Exception) { }
+            a.Wait();
+            mono = mono2;
             return buffer;
         }
         public static byte[] Flac_to_wav(string fil_n, byte ch, out byte[] mono)
         {
-            WaveFormat format = new WaveFormat(48000, 16, 1);
-            mono = null;
-            try
+            byte[] mono2 = null;
+            Task a = Task.Run(() =>
             {
-                NAudio.Flac.FlacReader reader = new NAudio.Flac.FlacReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, 1);
+                try
                 {
-                    mono = new byte[stream.Length];
-                    stream.Read(mono, 0, mono.Length);
+                    using (NAudio.Flac.FlacReader reader = new NAudio.Flac.FlacReader(fil_n))
+                    {
+                        using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                        {
+                            mono2 = new byte[stream.Length];
+                            stream.Read(mono2, 0, mono2.Length);
+                        }
+                    }
                 }
-                reader.Dispose();
-            }
-            catch (Exception) { }
-            format = new WaveFormat(48000, 16, ch);
+                catch (Exception) { }
+            });
             byte[] buffer = null;
             try
             {
-                NAudio.Flac.FlacReader reader = new NAudio.Flac.FlacReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, ch);
+                using (NAudio.Flac.FlacReader reader = new NAudio.Flac.FlacReader(fil_n))
                 {
-                    buffer = new byte[stream.Length];
-                    stream.Read(buffer, 0, buffer.Length);
+                    using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                    {
+                        buffer = new byte[stream.Length];
+                        stream.Read(buffer, 0, buffer.Length);
+                    }
                 }
-                reader.Dispose();
             }
             catch (Exception) { }
+            a.Wait();
+            mono = mono2;
             return buffer;
         }
         public static byte[] Ogg_to_wav(string fil_n, byte ch, out byte[] mono)
         {
-            WaveFormat format = new WaveFormat(48000, 16, 1);
-            mono = null;
-            try
+            byte[] mono2 = null;
+            Task a = Task.Run(() =>
             {
-                NAudio.Vorbis.VorbisWaveReader reader = new NAudio.Vorbis.VorbisWaveReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, 1);
+                try
                 {
-                    mono = new byte[stream.Length];
-                    stream.Read(mono, 0, mono.Length);
+                    using (NAudio.Vorbis.VorbisWaveReader reader = new NAudio.Vorbis.VorbisWaveReader(fil_n))
+                    {
+                        using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                        {
+                            mono2 = new byte[stream.Length];
+                            stream.Read(mono2, 0, mono2.Length);
+                        }
+                    }
                 }
-                reader.Dispose();
-            }
-            catch (Exception) { }
-            format = new WaveFormat(48000, 16, ch);
+                catch (Exception) { }
+            });
             byte[] buffer = null;
             try
             {
-                NAudio.Vorbis.VorbisWaveReader reader = new NAudio.Vorbis.VorbisWaveReader(fil_n);
-                using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                WaveFormat format = new WaveFormat(48000, 16, ch);
+                using (NAudio.Vorbis.VorbisWaveReader reader = new NAudio.Vorbis.VorbisWaveReader(fil_n))
                 {
-                    buffer = new byte[stream.Length];
-                    stream.Read(buffer, 0, buffer.Length);
+                    using (WaveFormatConversionStream stream = new WaveFormatConversionStream(format, reader))
+                    {
+                        buffer = new byte[stream.Length];
+                        stream.Read(buffer, 0, buffer.Length);
+                    }
                 }
-                reader.Dispose();
             }
             catch (Exception) { }
+            a.Wait();
+            mono = mono2;
             return buffer;
         }
         private static void Set_surround(ref byte[] byt1,ref byte[] byt2)
@@ -227,18 +271,19 @@ namespace game_01
         {
             List<byte> byt = new List<byte>();
             int i2;
-            for (int i=0;i<dat.Length;i+=4)
+            byte[] byt1 = null;byte[] byt2 = null;
+            if (rev)
             {
-                i2 = i + 2;
-                byt.Add(dat[i]); byt.Add(dat[i + 1]);
-                byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
-                if (rev)
+                for (int i = 0; i < dat.Length; i += 4)
                 {
+                    i2 = i + 2;
+                    byt.Add(dat[i]); byt.Add(dat[i + 1]);
+                    byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
                     if (surround)
                     {
-                        byte[] byt1 = new byte[] { dat[i2], dat[i2 + 1] };
-                        byte[] byt2 = new byte[] { dat[i], dat[i + 1] };
-                        Set_surround(ref byt1,ref byt2);
+                        byt1 = new byte[] { dat[i2], dat[i2 + 1] };
+                        byt2 = new byte[] { dat[i], dat[i + 1] };
+                        Set_surround(ref byt1, ref byt2);
                         byt.Add(byt1[0]); byt.Add(byt1[1]);
                         byt.Add(byt2[0]); byt.Add(byt2[1]);
                     }
@@ -248,12 +293,18 @@ namespace game_01
                         byt.Add(dat[i]); byt.Add(dat[i + 1]);
                     }
                 }
-                else
+            }
+            else
+            {
+                for (int i = 0; i < dat.Length; i += 4)
                 {
+                    i2 = i + 2;
+                    byt.Add(dat[i]); byt.Add(dat[i + 1]);
+                    byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
                     if (surround)
                     {
-                        byte[] byt1 = new byte[] { dat[i], dat[i + 1] };
-                        byte[] byt2 = new byte[] { dat[i2], dat[i2 + 1] };
+                        byt1 = new byte[] { dat[i], dat[i + 1] };
+                        byt2 = new byte[] { dat[i2], dat[i2 + 1] };
                         Set_surround(ref byt1, ref byt2);
                         byt.Add(byt1[0]); byt.Add(byt1[1]);
                         byt.Add(byt2[0]); byt.Add(byt2[1]);
@@ -281,20 +332,76 @@ namespace game_01
             }
             return byt.ToArray();
         }
-        public static byte[] Ch2_to_ch51(byte[] dat, bool rev, byte[] mono,bool surround)
+        public static byte[] Ch2_to_ch51(byte[] dat, bool rev, byte[] mono, bool surround)
         {
             List<byte> byt = new List<byte>();
             int i2; int i3;
-            for (int i = 0; i < dat.Length; i += 4)
+            byte[] byt1 = null;byte[] byt2 = null;
+            if (rev)
             {
-                i2 = i + 2;
-                i3 = i / 2;
-                byt.Add(dat[i]); byt.Add(dat[i + 1]);
-                byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
-                byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
-                byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
-                if (rev)
+                for (int i = 0; i < dat.Length; i += 4)
                 {
+                    i2 = i + 2;
+                    i3 = i / 2;
+                    byt.Add(dat[i]); byt.Add(dat[i + 1]);
+                    byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
+                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
+                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
+                    if (surround)
+                    {
+                        byt1 = new byte[] { dat[i2], dat[i2 + 1] };
+                        byt2 = new byte[] { dat[i], dat[i + 1] };
+                        Set_surround(ref byt1, ref byt2);
+                        byt.Add(byt1[0]); byt.Add(byt1[1]);
+                        byt.Add(byt2[0]); byt.Add(byt2[1]);
+                    }
+                    else
+                    {
+                        byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
+                        byt.Add(dat[i]); byt.Add(dat[i + 1]);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < dat.Length; i += 4)
+                {
+                    i2 = i + 2;
+                    i3 = i / 2;
+                    byt.Add(dat[i]); byt.Add(dat[i + 1]);
+                    byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
+                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
+                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
+                    if (surround)
+                    {
+                        byt1 = new byte[] { dat[i], dat[i + 1] };
+                        byt2 = new byte[] { dat[i2], dat[i2 + 1] };
+                        Set_surround(ref byt1, ref byt2);
+                        byt.Add(byt1[0]); byt.Add(byt1[1]);
+                        byt.Add(byt2[0]); byt.Add(byt2[1]);
+                    }
+                    else
+                    {
+                        byt.Add(dat[i]); byt.Add(dat[i + 1]);
+                        byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
+                    }
+                }
+            }
+            return byt.ToArray();
+        }
+        public static byte[] Ch2_to_ch5(byte[] dat, bool rev, byte[] mono,bool surround)
+        {
+            List<byte> byt = new List<byte>();
+            int i2; int i3;
+            if (rev)
+            {
+                for (int i = 0; i < dat.Length; i += 4)
+                {
+                    i2 = i + 2;
+                    i3 = i / 2;
+                    byt.Add(dat[i]); byt.Add(dat[i + 1]);
+                    byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
+                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                     if (surround)
                     {
                         byte[] byt1 = new byte[] { dat[i2], dat[i2 + 1] };
@@ -309,8 +416,16 @@ namespace game_01
                         byt.Add(dat[i]); byt.Add(dat[i + 1]);
                     }
                 }
-                else
+            }
+            else
+            {
+                for (int i = 0; i < dat.Length; i += 4)
                 {
+                    i2 = i + 2;
+                    i3 = i / 2;
+                    byt.Add(dat[i]); byt.Add(dat[i + 1]);
+                    byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
+                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                     if (surround)
                     {
                         byte[] byt1 = new byte[] { dat[i], dat[i + 1] };
@@ -324,30 +439,6 @@ namespace game_01
                         byt.Add(dat[i]); byt.Add(dat[i + 1]);
                         byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
                     }
-                }
-            }
-            return byt.ToArray();
-        }
-        public static byte[] Ch2_to_ch5(byte[] dat, bool rev, byte[] mono)
-        {
-            List<byte> byt = new List<byte>();
-            int i2; int i3;
-            for (int i = 0; i < dat.Length; i += 4)
-            {
-                i2 = i + 2;
-                i3 = i / 2;
-                byt.Add(dat[i]); byt.Add(dat[i + 1]);
-                byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
-                byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
-                if (rev)
-                {
-                    byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
-                    byt.Add(dat[i]); byt.Add(dat[i + 1]);
-                }
-                else
-                {
-                    byt.Add(dat[i]); byt.Add(dat[i + 1]);
-                    byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
                 }
             }
             return byt.ToArray();

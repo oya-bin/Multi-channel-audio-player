@@ -89,7 +89,7 @@ namespace game_01
                     dat2 = Audio.Ch2_to_ch4(dat, cb_bsidrev.Checked, Rb_surround.Checked);
                     break;
                 case 5:
-                    dat2 = Audio.Ch2_to_ch5(dat, cb_bsidrev.Checked, mono);
+                    dat2 = Audio.Ch2_to_ch5(dat, cb_bsidrev.Checked, mono, Rb_surround.Checked);
                     break;
                 case 51:
                     dat2 = Audio.Ch2_to_ch51(dat, cb_bsidrev.Checked, mono, Rb_surround.Checked);
@@ -354,7 +354,7 @@ namespace game_01
                                     + "Licence(Free?)\r\n\r\n"
                                     + "SharpDX\r\n-Alexandre Mutel\r\nhttp://sharpdx.org/";
         public const string title = "Audio Player たいたんぱー";
-        public const string version = "Ver 170921-1";
+        public const string version = "Ver 170921-2";
         public const string create = "by under_binary(oya_bin)";
         public const string fullname = title + " /" + version + " /" + create;
         public static string[] files = null;
