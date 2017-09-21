@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.gb_speakers = new System.Windows.Forms.GroupBox();
-            this.rb_5ch = new System.Windows.Forms.RadioButton();
             this.rb_51ch = new System.Windows.Forms.RadioButton();
             this.rb_4ch = new System.Windows.Forms.RadioButton();
             this.rb_21ch = new System.Windows.Forms.RadioButton();
@@ -81,33 +80,21 @@
             // 
             // gb_speakers
             // 
-            this.gb_speakers.Controls.Add(this.rb_5ch);
             this.gb_speakers.Controls.Add(this.rb_51ch);
             this.gb_speakers.Controls.Add(this.rb_4ch);
             this.gb_speakers.Controls.Add(this.rb_21ch);
             this.gb_speakers.Controls.Add(this.rb_2ch);
             this.gb_speakers.Location = new System.Drawing.Point(12, 12);
             this.gb_speakers.Name = "gb_speakers";
-            this.gb_speakers.Size = new System.Drawing.Size(138, 88);
+            this.gb_speakers.Size = new System.Drawing.Size(138, 75);
             this.gb_speakers.TabIndex = 0;
             this.gb_speakers.TabStop = false;
-            this.gb_speakers.Text = "Speakers";
-            // 
-            // rb_5ch
-            // 
-            this.rb_5ch.AutoSize = true;
-            this.rb_5ch.Location = new System.Drawing.Point(6, 62);
-            this.rb_5ch.Name = "rb_5ch";
-            this.rb_5ch.Size = new System.Drawing.Size(41, 16);
-            this.rb_5ch.TabIndex = 3;
-            this.rb_5ch.Text = "5ch";
-            this.rb_5ch.UseVisualStyleBackColor = true;
-            this.rb_5ch.CheckedChanged += new System.EventHandler(this.Rb_5ch_CheckedChanged);
+            this.gb_speakers.Text = "Speakers(Virtual or Multi speakers)";
             // 
             // rb_51ch
             // 
             this.rb_51ch.AutoSize = true;
-            this.rb_51ch.Location = new System.Drawing.Point(67, 40);
+            this.rb_51ch.Location = new System.Drawing.Point(67, 53);
             this.rb_51ch.Name = "rb_51ch";
             this.rb_51ch.Size = new System.Drawing.Size(49, 16);
             this.rb_51ch.TabIndex = 5;
@@ -118,7 +105,7 @@
             // rb_4ch
             // 
             this.rb_4ch.AutoSize = true;
-            this.rb_4ch.Location = new System.Drawing.Point(6, 40);
+            this.rb_4ch.Location = new System.Drawing.Point(6, 53);
             this.rb_4ch.Name = "rb_4ch";
             this.rb_4ch.Size = new System.Drawing.Size(49, 16);
             this.rb_4ch.TabIndex = 2;
@@ -129,7 +116,7 @@
             // rb_21ch
             // 
             this.rb_21ch.AutoSize = true;
-            this.rb_21ch.Location = new System.Drawing.Point(67, 18);
+            this.rb_21ch.Location = new System.Drawing.Point(67, 31);
             this.rb_21ch.Name = "rb_21ch";
             this.rb_21ch.Size = new System.Drawing.Size(49, 16);
             this.rb_21ch.TabIndex = 4;
@@ -141,7 +128,7 @@
             // 
             this.rb_2ch.AutoSize = true;
             this.rb_2ch.Checked = true;
-            this.rb_2ch.Location = new System.Drawing.Point(6, 18);
+            this.rb_2ch.Location = new System.Drawing.Point(6, 31);
             this.rb_2ch.Name = "rb_2ch";
             this.rb_2ch.Size = new System.Drawing.Size(56, 16);
             this.rb_2ch.TabIndex = 1;
@@ -152,7 +139,7 @@
             // 
             // but_play
             // 
-            this.but_play.Location = new System.Drawing.Point(18, 215);
+            this.but_play.Location = new System.Drawing.Point(75, 195);
             this.but_play.Name = "but_play";
             this.but_play.Size = new System.Drawing.Size(75, 23);
             this.but_play.TabIndex = 1;
@@ -162,7 +149,7 @@
             // 
             // but_stop
             // 
-            this.but_stop.Location = new System.Drawing.Point(18, 245);
+            this.but_stop.Location = new System.Drawing.Point(75, 224);
             this.but_stop.Name = "but_stop";
             this.but_stop.Size = new System.Drawing.Size(75, 23);
             this.but_stop.TabIndex = 3;
@@ -417,7 +404,7 @@
             // 
             // but_exit
             // 
-            this.but_exit.Location = new System.Drawing.Point(18, 274);
+            this.but_exit.Location = new System.Drawing.Point(12, 303);
             this.but_exit.Name = "but_exit";
             this.but_exit.Size = new System.Drawing.Size(75, 23);
             this.but_exit.TabIndex = 5;
@@ -428,7 +415,7 @@
             // cb_loop
             // 
             this.cb_loop.AutoSize = true;
-            this.cb_loop.Location = new System.Drawing.Point(19, 184);
+            this.cb_loop.Location = new System.Drawing.Point(18, 162);
             this.cb_loop.Name = "cb_loop";
             this.cb_loop.Size = new System.Drawing.Size(48, 16);
             this.cb_loop.TabIndex = 4;
@@ -437,7 +424,7 @@
             // 
             // But_Licence
             // 
-            this.But_Licence.Location = new System.Drawing.Point(18, 303);
+            this.But_Licence.Location = new System.Drawing.Point(75, 274);
             this.But_Licence.Name = "But_Licence";
             this.But_Licence.Size = new System.Drawing.Size(75, 23);
             this.But_Licence.TabIndex = 6;
@@ -449,18 +436,18 @@
             // 
             this.gb_decord.Controls.Add(this.Rb_surround);
             this.gb_decord.Controls.Add(this.Rb_stereo);
-            this.gb_decord.Location = new System.Drawing.Point(12, 106);
+            this.gb_decord.Location = new System.Drawing.Point(12, 93);
             this.gb_decord.Name = "gb_decord";
-            this.gb_decord.Size = new System.Drawing.Size(138, 68);
+            this.gb_decord.Size = new System.Drawing.Size(138, 63);
             this.gb_decord.TabIndex = 7;
             this.gb_decord.TabStop = false;
-            this.gb_decord.Text = "Decord(Not less than Quad)";
+            this.gb_decord.Text = "Decord(Quad/5.1ch)";
             // 
             // Rb_surround
             // 
             this.Rb_surround.AutoSize = true;
             this.Rb_surround.Checked = true;
-            this.Rb_surround.Location = new System.Drawing.Point(6, 46);
+            this.Rb_surround.Location = new System.Drawing.Point(6, 38);
             this.Rb_surround.Name = "Rb_surround";
             this.Rb_surround.Size = new System.Drawing.Size(68, 16);
             this.Rb_surround.TabIndex = 4;
@@ -472,7 +459,7 @@
             // Rb_stereo
             // 
             this.Rb_stereo.AutoSize = true;
-            this.Rb_stereo.Location = new System.Drawing.Point(6, 28);
+            this.Rb_stereo.Location = new System.Drawing.Point(6, 18);
             this.Rb_stereo.Name = "Rb_stereo";
             this.Rb_stereo.Size = new System.Drawing.Size(85, 16);
             this.Rb_stereo.TabIndex = 1;
@@ -532,7 +519,6 @@
         private System.Windows.Forms.Button but_play;
         private System.Windows.Forms.Button but_stop;
         private System.Windows.Forms.CheckBox cb_bsidrev;
-        private System.Windows.Forms.RadioButton rb_5ch;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox Gb_fro_cen;
         private System.Windows.Forms.HScrollBar Hsb_fc;

@@ -254,7 +254,7 @@ namespace game_01
             mono = mono2;
             return buffer;
         }
-        private static void Set_surround(ref byte[] byt1,ref byte[] byt2)
+        private static void Set_surround(ref byte[] byt1, ref byte[] byt2)
         {
             short srt1 = BitConverter.ToInt16(byt1, 0);
             short srt2 = BitConverter.ToInt16(byt2, 0);
@@ -266,6 +266,15 @@ namespace game_01
             else if (in2 > short.MaxValue) { in2 = short.MaxValue; }
             byt1 = BitConverter.GetBytes(in1);
             byt2 = BitConverter.GetBytes(in2);
+        }
+        private static void Set_front(ref byte[] byt1, byte[] byt2)
+        {
+            short srt1 = BitConverter.ToInt16(byt1, 0);
+            short srt2 = BitConverter.ToInt16(byt2, 0);
+            int in1 = ((int)srt1 + (int)srt2) / 2;
+            if (in1 < short.MinValue) { in1 = short.MinValue; }
+            else if (in1 > short.MaxValue) { in1 = short.MaxValue; }
+            byt1 = BitConverter.GetBytes(in1);
         }
         public static byte[] Ch2_to_ch4(byte[] dat,bool rev,bool surround)
         {
@@ -345,10 +354,13 @@ namespace game_01
                     i3 = i / 2;
                     byt.Add(dat[i]); byt.Add(dat[i + 1]);
                     byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
-                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
-                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                     if (surround)
                     {
+                        byt1 = new byte[] { dat[i], dat[i + 1] };
+                        byt2 = new byte[] { dat[i2], dat[i2 + 1] };
+                        Set_front(ref byt1, byt2);
+                        byt.Add(byt1[0]); byt.Add(byt1[1]);
+                        byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                         byt1 = new byte[] { dat[i2], dat[i2 + 1] };
                         byt2 = new byte[] { dat[i], dat[i + 1] };
                         Set_surround(ref byt1, ref byt2);
@@ -357,6 +369,8 @@ namespace game_01
                     }
                     else
                     {
+                        byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
+                        byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                         byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
                         byt.Add(dat[i]); byt.Add(dat[i + 1]);
                     }
@@ -370,10 +384,13 @@ namespace game_01
                     i3 = i / 2;
                     byt.Add(dat[i]); byt.Add(dat[i + 1]);
                     byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
-                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
-                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                     if (surround)
                     {
+                        byt1 = new byte[] { dat[i], dat[i + 1] };
+                        byt2 = new byte[] { dat[i2], dat[i2 + 1] };
+                        Set_front(ref byt1, byt2);
+                        byt.Add(byt1[0]); byt.Add(byt1[1]);
+                        byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                         byt1 = new byte[] { dat[i], dat[i + 1] };
                         byt2 = new byte[] { dat[i2], dat[i2 + 1] };
                         Set_surround(ref byt1, ref byt2);
@@ -382,6 +399,8 @@ namespace game_01
                     }
                     else
                     {
+                        byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
+                        byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                         byt.Add(dat[i]); byt.Add(dat[i + 1]);
                         byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
                     }
@@ -389,7 +408,7 @@ namespace game_01
             }
             return byt.ToArray();
         }
-        public static byte[] Ch2_to_ch5(byte[] dat, bool rev, byte[] mono,bool surround)
+        public static byte[] Ch2_to_ch5(byte[] dat, bool rev, byte[] mono, bool surround)
         {
             List<byte> byt = new List<byte>();
             int i2; int i3;
@@ -402,9 +421,12 @@ namespace game_01
                     i3 = i / 2;
                     byt.Add(dat[i]); byt.Add(dat[i + 1]);
                     byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
-                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                     if (surround)
                     {
+                        byt1 = new byte[] { dat[i], dat[i + 1] };
+                        byt2 = new byte[] { dat[i2], dat[i2 + 1] };
+                        Set_front(ref byt1, byt2);
+                        byt.Add(byt1[0]); byt.Add(byt1[1]);
                         byt1 = new byte[] { dat[i2], dat[i2 + 1] };
                         byt2 = new byte[] { dat[i], dat[i + 1] };
                         Set_surround(ref byt1, ref byt2);
@@ -413,6 +435,7 @@ namespace game_01
                     }
                     else
                     {
+                        byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                         byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
                         byt.Add(dat[i]); byt.Add(dat[i + 1]);
                     }
@@ -426,9 +449,12 @@ namespace game_01
                     i3 = i / 2;
                     byt.Add(dat[i]); byt.Add(dat[i + 1]);
                     byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
-                    byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                     if (surround)
                     {
+                        byt1 = new byte[] { dat[i], dat[i + 1] };
+                        byt2 = new byte[] { dat[i2], dat[i2 + 1] };
+                        Set_front(ref byt1, byt2);
+                        byt.Add(byt1[0]); byt.Add(byt1[1]);
                         byt1 = new byte[] { dat[i], dat[i + 1] };
                         byt2 = new byte[] { dat[i2], dat[i2 + 1] };
                         Set_surround(ref byt1, ref byt2);
@@ -437,6 +463,7 @@ namespace game_01
                     }
                     else
                     {
+                        byt.Add(mono[i3]); byt.Add(mono[i3 + 1]);
                         byt.Add(dat[i]); byt.Add(dat[i + 1]);
                         byt.Add(dat[i2]); byt.Add(dat[i2 + 1]);
                     }
