@@ -60,7 +60,6 @@ namespace game_01
             }
             //var xa_mas = new SharpDX.XAudio2.MasteringVoice(xa_sou, ch, 48000, dev_ind);
             var xa_mas = new SharpDX.XAudio2.MasteringVoice(xa_sou,ch,48000);
-            //dev_ind = dev;
             xa_mas.Dispose();
             mus_start.Clear();
         }

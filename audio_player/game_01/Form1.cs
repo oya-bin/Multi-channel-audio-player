@@ -68,14 +68,12 @@ namespace game_01
         {
             if (xa_mus == null) { xa_mus = new Xa2_mus(); }
             else { xa_mus.Dispose(); }
-            gb_speakers.Enabled = false;
-            cb_bsidrev.Enabled = false;
+            Set_gb1(false);
             xa_mus.Init(0,Frm1_c.ch);
             byte[] dat = Source_sel(fil_n, out byte[] mono);
             if (dat == null)
             {
-                gb_speakers.Enabled = true;
-                cb_bsidrev.Enabled = true;
+                Set_gb1(true);
                 return -2;
             }
             byte[] dat2 = null;
@@ -88,13 +86,13 @@ namespace game_01
                     dat2 = Audio.Ch2_to_ch21(dat, cb_bsidrev.Checked, mono);
                     break;
                 case 4:
-                    dat2 = Audio.Ch2_to_ch4(dat, cb_bsidrev.Checked);
+                    dat2 = Audio.Ch2_to_ch4(dat, cb_bsidrev.Checked, Rb_surround.Checked);
                     break;
                 case 5:
                     dat2 = Audio.Ch2_to_ch5(dat, cb_bsidrev.Checked, mono);
                     break;
                 case 51:
-                    dat2 = Audio.Ch2_to_ch51(dat, cb_bsidrev.Checked, mono);
+                    dat2 = Audio.Ch2_to_ch51(dat, cb_bsidrev.Checked, mono, Rb_surround.Checked);
                     break;
             }
             Set_array_vol(Frm1_c.ch);
@@ -102,7 +100,7 @@ namespace game_01
             if (xa_mus.Play_exe(0) == -1)
             {
                 MessageBox.Show("Bad Speakers"); xa_mus.Dispose();
-                gb_speakers.Enabled = true; cb_bsidrev.Enabled = true;
+                Set_gb1(true);
                 return -1;
             }
             Wait_task();
@@ -155,10 +153,10 @@ namespace game_01
         {
             try { xa_mus.Dispose(); }
             catch (Exception) { }
-            gb_speakers.Enabled = true;
+            Set_gb1(true);
             Frm1_c.mus_exit = true;
             lb_mus.Enabled = true;
-            cb_bsidrev.Enabled = true;
+            Task.Run(() => { GC.Collect(); });
             Frm1_c.lock_list = false;
         }
 
@@ -303,28 +301,43 @@ namespace game_01
                             break;
                         case -1:
                             lb_mus.Enabled = true;
-                            gb_speakers.Enabled = true;
-                            cb_bsidrev.Enabled = true;
+                            Set_gb1(true);
                             Frm1_c.lock_list = false;
                             return;
                     }
                     try { lb_mus.SelectedIndex++; }
                     catch (Exception) { lb_mus.SelectedIndex = 0; }
                     Application.DoEvents();
+                    Task.Run(() => { GC.Collect(); });
                     System.Threading.Thread.Sleep(100);
                 }
                 if (!cb_loop.Checked) { break; }
                 x = 0;
             }
             lb_mus.Enabled = true;
-            gb_speakers.Enabled = true;
-            cb_bsidrev.Enabled = true;
+            Set_gb1(true);
+            Task.Run(() => { GC.Collect(); });
             Frm1_c.lock_list = false;
         }
-
+        private void Set_gb1(bool swi)
+        {
+            gb_decord.Enabled = swi;
+            gb_speakers.Enabled = swi;
+            cb_bsidrev.Enabled = swi;
+        }
         private void But_Licence_Click(object sender, EventArgs e)
         {
             MessageBox.Show(Frm1_c.licence);
+        }
+
+        private void Rb_stereo_CheckedChanged(object sender, EventArgs e)
+        {
+            cb_bsidrev.Checked = true;
+        }
+
+        private void Rb_surround_CheckedChanged(object sender, EventArgs e)
+        {
+            cb_bsidrev.Checked = false;
         }
     }
     public static class Frm1_c
@@ -341,7 +354,7 @@ namespace game_01
                                     + "Licence(Free?)\r\n\r\n"
                                     + "SharpDX\r\n-Alexandre Mutel\r\nhttp://sharpdx.org/";
         public const string title = "Audio Player たいたんぱー";
-        public const string version = "Ver 170919-1";
+        public const string version = "Ver 170921-1";
         public const string create = "by under_binary(oya_bin)";
         public const string fullname = title + " /" + version + " /" + create;
         public static string[] files = null;

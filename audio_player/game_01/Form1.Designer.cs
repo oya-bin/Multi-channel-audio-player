@@ -64,6 +64,9 @@
             this.but_exit = new System.Windows.Forms.Button();
             this.cb_loop = new System.Windows.Forms.CheckBox();
             this.But_Licence = new System.Windows.Forms.Button();
+            this.gb_decord = new System.Windows.Forms.GroupBox();
+            this.Rb_surround = new System.Windows.Forms.RadioButton();
+            this.Rb_stereo = new System.Windows.Forms.RadioButton();
             this.gb_speakers.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.Gb_bak_Rig.SuspendLayout();
@@ -73,6 +76,7 @@
             this.Gb_fro_rig.SuspendLayout();
             this.Gb_fro_lef.SuspendLayout();
             this.Gb_fro_cen.SuspendLayout();
+            this.gb_decord.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb_speakers
@@ -84,7 +88,7 @@
             this.gb_speakers.Controls.Add(this.rb_2ch);
             this.gb_speakers.Location = new System.Drawing.Point(12, 12);
             this.gb_speakers.Name = "gb_speakers";
-            this.gb_speakers.Size = new System.Drawing.Size(128, 88);
+            this.gb_speakers.Size = new System.Drawing.Size(138, 88);
             this.gb_speakers.TabIndex = 0;
             this.gb_speakers.TabStop = false;
             this.gb_speakers.Text = "Speakers";
@@ -96,7 +100,6 @@
             this.rb_5ch.Name = "rb_5ch";
             this.rb_5ch.Size = new System.Drawing.Size(41, 16);
             this.rb_5ch.TabIndex = 3;
-            this.rb_5ch.TabStop = true;
             this.rb_5ch.Text = "5ch";
             this.rb_5ch.UseVisualStyleBackColor = true;
             this.rb_5ch.CheckedChanged += new System.EventHandler(this.Rb_5ch_CheckedChanged);
@@ -104,11 +107,10 @@
             // rb_51ch
             // 
             this.rb_51ch.AutoSize = true;
-            this.rb_51ch.Location = new System.Drawing.Point(68, 40);
+            this.rb_51ch.Location = new System.Drawing.Point(67, 40);
             this.rb_51ch.Name = "rb_51ch";
             this.rb_51ch.Size = new System.Drawing.Size(49, 16);
             this.rb_51ch.TabIndex = 5;
-            this.rb_51ch.TabStop = true;
             this.rb_51ch.Text = "5.1ch";
             this.rb_51ch.UseVisualStyleBackColor = true;
             this.rb_51ch.CheckedChanged += new System.EventHandler(this.Rb_51ch_CheckedChanged);
@@ -120,7 +122,6 @@
             this.rb_4ch.Name = "rb_4ch";
             this.rb_4ch.Size = new System.Drawing.Size(49, 16);
             this.rb_4ch.TabIndex = 2;
-            this.rb_4ch.TabStop = true;
             this.rb_4ch.Text = "Quad";
             this.rb_4ch.UseVisualStyleBackColor = true;
             this.rb_4ch.CheckedChanged += new System.EventHandler(this.Rb_4ch_CheckedChanged);
@@ -128,11 +129,10 @@
             // rb_21ch
             // 
             this.rb_21ch.AutoSize = true;
-            this.rb_21ch.Location = new System.Drawing.Point(68, 18);
+            this.rb_21ch.Location = new System.Drawing.Point(67, 18);
             this.rb_21ch.Name = "rb_21ch";
             this.rb_21ch.Size = new System.Drawing.Size(49, 16);
             this.rb_21ch.TabIndex = 4;
-            this.rb_21ch.TabStop = true;
             this.rb_21ch.Text = "2.1ch";
             this.rb_21ch.UseVisualStyleBackColor = true;
             this.rb_21ch.CheckedChanged += new System.EventHandler(this.Rb_21ch_CheckedChanged);
@@ -140,6 +140,7 @@
             // rb_2ch
             // 
             this.rb_2ch.AutoSize = true;
+            this.rb_2ch.Checked = true;
             this.rb_2ch.Location = new System.Drawing.Point(6, 18);
             this.rb_2ch.Name = "rb_2ch";
             this.rb_2ch.Size = new System.Drawing.Size(56, 16);
@@ -151,7 +152,7 @@
             // 
             // but_play
             // 
-            this.but_play.Location = new System.Drawing.Point(18, 118);
+            this.but_play.Location = new System.Drawing.Point(18, 215);
             this.but_play.Name = "but_play";
             this.but_play.Size = new System.Drawing.Size(75, 23);
             this.but_play.TabIndex = 1;
@@ -161,7 +162,7 @@
             // 
             // but_stop
             // 
-            this.but_stop.Location = new System.Drawing.Point(18, 157);
+            this.but_stop.Location = new System.Drawing.Point(18, 245);
             this.but_stop.Name = "but_stop";
             this.but_stop.Size = new System.Drawing.Size(75, 23);
             this.but_stop.TabIndex = 3;
@@ -172,8 +173,6 @@
             // cb_bsidrev
             // 
             this.cb_bsidrev.AutoSize = true;
-            this.cb_bsidrev.Checked = true;
-            this.cb_bsidrev.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_bsidrev.Location = new System.Drawing.Point(214, 37);
             this.cb_bsidrev.Name = "cb_bsidrev";
             this.cb_bsidrev.Size = new System.Drawing.Size(122, 16);
@@ -192,7 +191,7 @@
             this.groupBox2.Controls.Add(this.Gb_fro_rig);
             this.groupBox2.Controls.Add(this.Gb_fro_lef);
             this.groupBox2.Controls.Add(this.Gb_fro_cen);
-            this.groupBox2.Location = new System.Drawing.Point(146, 12);
+            this.groupBox2.Location = new System.Drawing.Point(156, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(424, 197);
             this.groupBox2.TabIndex = 4;
@@ -409,7 +408,7 @@
             // 
             this.lb_mus.FormattingEnabled = true;
             this.lb_mus.ItemHeight = 12;
-            this.lb_mus.Location = new System.Drawing.Point(152, 215);
+            this.lb_mus.Location = new System.Drawing.Point(162, 215);
             this.lb_mus.Name = "lb_mus";
             this.lb_mus.ScrollAlwaysVisible = true;
             this.lb_mus.Size = new System.Drawing.Size(418, 112);
@@ -418,7 +417,7 @@
             // 
             // but_exit
             // 
-            this.but_exit.Location = new System.Drawing.Point(18, 195);
+            this.but_exit.Location = new System.Drawing.Point(18, 274);
             this.but_exit.Name = "but_exit";
             this.but_exit.Size = new System.Drawing.Size(75, 23);
             this.but_exit.TabIndex = 5;
@@ -429,7 +428,7 @@
             // cb_loop
             // 
             this.cb_loop.AutoSize = true;
-            this.cb_loop.Location = new System.Drawing.Point(16, 236);
+            this.cb_loop.Location = new System.Drawing.Point(19, 184);
             this.cb_loop.Name = "cb_loop";
             this.cb_loop.Size = new System.Drawing.Size(48, 16);
             this.cb_loop.TabIndex = 4;
@@ -446,11 +445,47 @@
             this.But_Licence.UseVisualStyleBackColor = true;
             this.But_Licence.Click += new System.EventHandler(this.But_Licence_Click);
             // 
+            // gb_decord
+            // 
+            this.gb_decord.Controls.Add(this.Rb_surround);
+            this.gb_decord.Controls.Add(this.Rb_stereo);
+            this.gb_decord.Location = new System.Drawing.Point(12, 106);
+            this.gb_decord.Name = "gb_decord";
+            this.gb_decord.Size = new System.Drawing.Size(138, 68);
+            this.gb_decord.TabIndex = 7;
+            this.gb_decord.TabStop = false;
+            this.gb_decord.Text = "Decord(Not less than Quad)";
+            // 
+            // Rb_surround
+            // 
+            this.Rb_surround.AutoSize = true;
+            this.Rb_surround.Checked = true;
+            this.Rb_surround.Location = new System.Drawing.Point(6, 46);
+            this.Rb_surround.Name = "Rb_surround";
+            this.Rb_surround.Size = new System.Drawing.Size(68, 16);
+            this.Rb_surround.TabIndex = 4;
+            this.Rb_surround.TabStop = true;
+            this.Rb_surround.Text = "Surround";
+            this.Rb_surround.UseVisualStyleBackColor = true;
+            this.Rb_surround.CheckedChanged += new System.EventHandler(this.Rb_surround_CheckedChanged);
+            // 
+            // Rb_stereo
+            // 
+            this.Rb_stereo.AutoSize = true;
+            this.Rb_stereo.Location = new System.Drawing.Point(6, 28);
+            this.Rb_stereo.Name = "Rb_stereo";
+            this.Rb_stereo.Size = new System.Drawing.Size(85, 16);
+            this.Rb_stereo.TabIndex = 1;
+            this.Rb_stereo.Text = "Multi Stereo";
+            this.Rb_stereo.UseVisualStyleBackColor = true;
+            this.Rb_stereo.CheckedChanged += new System.EventHandler(this.Rb_stereo_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 338);
+            this.ClientSize = new System.Drawing.Size(591, 338);
+            this.Controls.Add(this.gb_decord);
             this.Controls.Add(this.But_Licence);
             this.Controls.Add(this.cb_loop);
             this.Controls.Add(this.but_exit);
@@ -460,7 +495,7 @@
             this.Controls.Add(this.but_play);
             this.Controls.Add(this.gb_speakers);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Audio Player たいたんぱー";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.gb_speakers.ResumeLayout(false);
             this.gb_speakers.PerformLayout();
@@ -480,6 +515,8 @@
             this.Gb_fro_lef.PerformLayout();
             this.Gb_fro_cen.ResumeLayout(false);
             this.Gb_fro_cen.PerformLayout();
+            this.gb_decord.ResumeLayout(false);
+            this.gb_decord.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -523,5 +560,8 @@
         private System.Windows.Forms.Button but_exit;
         private System.Windows.Forms.CheckBox cb_loop;
         private System.Windows.Forms.Button But_Licence;
+        private System.Windows.Forms.GroupBox gb_decord;
+        private System.Windows.Forms.RadioButton Rb_surround;
+        private System.Windows.Forms.RadioButton Rb_stereo;
     }
 }
